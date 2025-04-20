@@ -1,0 +1,20 @@
+{
+  "name": "soal-quiz-adek",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "obfuscate": "npx javascript-obfuscator js/scripts.js --output dist/js/scripts.js",
+    "copy-assets": "npx ncp ./css dist/css && npx ncp ./assets dist/assets && npx ncp ./index.html dist/index.html",
+    "build": "npm run obfuscate && npm run copy-assets"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ngopikode:ngopikode/kuis-fotografi-dasar.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  }
+}
