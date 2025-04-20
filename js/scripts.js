@@ -435,7 +435,7 @@ function showResults() {
     // shareBtn.style.display = score >= 15 ? 'block' : 'none';
 
     // Unlock Level 2 if score >= 4 on Level 1
-    if (currentLevel === 1 && score >= 4) {
+    if (currentLevel === 1 && score >= 15) {
         document.getElementById('level2-btn').disabled = false;
         // change btn color to primary
         document.getElementById('level2-btn').classList.remove('btn-secondary');
@@ -468,22 +468,15 @@ function shareScore() {
     document.getElementById('exit-btn').style.display = 'none';
 
     html2canvas(shareCard).then(canvas => {
-        canvas.toBlob(blob => {
-            const file = new File([blob], 'skor-kuis.png', {type: 'image/png'});
-            const message = `🔥 Aku baru aja dapet skor ${score} di KUIS KEREN INI! 🚀\nCoba juga yuk!\n\nAyo, buktikan kamu lebih baik dari aku!`;
+        const imgData = canvas.toDataURL('image/png');
 
-            if (navigator.canShare && navigator.canShare({files: [file]})) {
-                navigator.share({
-                    title: 'Skor Kuis Keren!',
-                    text: message,
-                    files: [file]
-                }).catch(err => console.error('Share gagal:', err));
-            } else {
-                alert('Fitur share tidak didukung di perangkat ini 😢');
-            }
+        // Auto-download gambar
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = `skor-${currentLevel}-${score}.png`;
+        link.click();
 
-            document.getElementById('exit-btn').style.display = 'block';
-        }, 'image/png');
+        document.getElementById('exit-btn').style.display = 'block';
     });
 }
 
