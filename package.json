@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "obfuscate-js": "npx javascript-obfuscator js/scripts.js --output dist/js/scripts.js",
-    "copy-assets": "npx ncp ./css/styles.css dist/css/styles.css && npx ncp ./assets dist/assets && npx ncp ./index.html dist/index.html",
-    "build": "npm run obfuscate-js && npm run copy-assets"
+    "obfuscate-js": "npx javascript-obfuscator js/scripts.js --output docs/js/scripts.js",
+    "minify-css": "npx cleancss -o docs/css/styles.min.css css/styles.css",
+    "copy-assets": "npx ncp ./assets docs\\assets && npx ncp ./index.html docs\\index.html",
+    "build": "npm run obfuscate-js && npm run minify-css && npm run copy-assets"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,8 @@
   },
   "private": true,
   "devDependencies": {
-    "csso": "^5.0.5",
-    "javascript-obfuscator": "^4.1.1"
+    "clean-css-cli": "^5.6.3",
+    "javascript-obfuscator": "^4.1.1",
+    "mkdirp": "^3.0.1"
   }
 }
