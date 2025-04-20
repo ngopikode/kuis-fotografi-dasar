@@ -466,29 +466,25 @@ function showResults() {
 function shareScore() {
     const shareCard = document.getElementById('result-container');
     document.getElementById('exit-btn').style.display = 'none';
-    const message = `🔥 Aku baru aja dapet skor ${score} di KUIS KEREN INI! 🚀\nCoba juga yuk!\n\nAyo, buktikan kamu lebih baik dari aku!`;
 
     html2canvas(shareCard).then(canvas => {
-        // Convert canvas to base64 image data
-        const imgData = canvas.toDataURL('image/png');
+        canvas.toBlob(blob => {
+            const file = new File([blob], 'skor-kuis.png', {type: 'image/png'});
+            const message = `🔥 Aku baru aja dapet skor ${score} di KUIS KEREN INI! 🚀\nCoba juga yuk!\n\nAyo, buktikan kamu lebih baik dari aku!`;
 
-        // Create a temporary download link for the image
-        const link = document.createElement('a');
-        link.href = imgData;
-        link.download = 'skor-kuis.png';
+            if (navigator.canShare && navigator.canShare({files: [file]})) {
+                navigator.share({
+                    title: 'Skor Kuis Keren!',
+                    text: message,
+                    files: [file]
+                }).catch(err => console.error('Share gagal:', err));
+            } else {
+                alert('Fitur share tidak didukung di perangkat ini 😢');
+            }
 
-        // Create WhatsApp message
-        const whatsappMessage = `${message}\n\nGambar: ${link.href}`;
-
-        // Open WhatsApp link with message
-        // Redirect user to WhatsApp
-        // Open the link in a new tab
-        window.open(`https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-
-        // Optionally, you can automatically trigger the download of the image:
-        // link.click();
+            document.getElementById('exit-btn').style.display = 'block';
+        }, 'image/png');
     });
-    document.getElementById('exit-btn').style.display = 'block';
 }
 
 function goToLevelSelection() {
