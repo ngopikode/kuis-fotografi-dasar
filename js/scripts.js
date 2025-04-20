@@ -34,120 +34,120 @@ document.addEventListener("pointerdown", function (e) {
 });
 
 const level1Questions = [
-    {
-        question: "Apa itu technopreneur di bidang desain komunikasi visual?",
-        options: ["Pekerja kantoran", "Wirausaha berbasis teknologi", "Fotografer freelance", "Desainer grafis junior"],
-        correct: 1,
-        explanation: "Technopreneur adalah wirausaha yang mengembangkan bisnis dengan memanfaatkan teknologi digital, seperti desain grafis, media sosial, dan fotografi."
-    },
-    {
-        question: "Apa yang dimaksud K3LH?",
-        options: ["Kamera, Komputer, Lighting, Harddisk", "Keselamatan dan Kesehatan Kerja serta Lingkungan Hidup", "Komunitas Kreatif Lokal Harapan", "Kode Etik 3D"],
-        correct: 1,
-        explanation: "K3LH merupakan aturan dan prosedur keselamatan kerja dan perlindungan lingkungan di tempat kerja, termasuk di industri desain dan fotografi."
-    },
-    {
-        question: "Proses berpikir kreatif biasanya dimulai dengan...",
-        options: ["Meniru karya orang lain", "Membaca buku pelajaran", "Mencari ide dan inspirasi", "Memotret langsung"],
-        correct: 2,
-        explanation: "Berpikir kreatif dimulai dengan pencarian ide atau inspirasi agar menghasilkan konsep desain atau karya yang baru dan unik."
-    },
-    {
-        question: "Sketsa adalah...",
-        options: ["Foto model", "Gambar rancangan awal", "Desain digital", "Filter foto"],
-        correct: 1,
-        explanation: "Sketsa adalah gambar rancangan awal yang menjadi acuan sebelum karya desain atau ilustrasi dibuat secara utuh."
-    },
-    {
-        question: "Fungsi tipografi dalam desain adalah...",
-        options: ["Menyusun teks agar komunikatif", "Mengatur warna foto", "Memilih kamera", "Menentukan ISO"],
-        correct: 0,
-        explanation: "Tipografi berfungsi mengatur bentuk dan tata letak huruf agar pesan desain lebih mudah terbaca dan menarik."
-    },
-    {
-        question: "Bitmap adalah...",
-        options: ["Gambar berbasis pixel", "Gambar berbasis vector", "Format animasi", "Kamera digital"],
-        correct: 0,
-        explanation: "Bitmap merupakan gambar yang terdiri dari pixel-pixel kecil. Saat diperbesar, gambar bisa pecah."
-    },
-    {
-        question: "Vector adalah...",
-        options: ["Gambar yang pecah saat diperbesar", "Gambar berbasis garis dan bidang", "File foto hitam putih", "Filter kamera"],
-        correct: 1,
-        explanation: "Vector adalah gambar yang dibentuk dari garis, bidang, dan kurva, sehingga tetap tajam saat diperbesar."
-    },
-    {
-        question: "Industri 4.0 identik dengan...",
-        options: ["Desain manual", "Teknologi digital dan otomatisasi", "Poster tradisional", "Lensa fix"],
-        correct: 1,
-        explanation: "Industri 4.0 adalah era otomatisasi industri berbasis teknologi digital, termasuk di bidang desain dan fotografi."
-    },
-    {
-        question: "Society 5.0 adalah konsep tentang...",
-        options: ["Masyarakat digital seimbang dengan kemanusiaan", "Dunia fotografi outdoor", "Komunitas pegiat desain", "Kamera film lawas"],
-        correct: 0,
-        explanation: "Society 5.0 merupakan konsep masyarakat yang memanfaatkan teknologi digital tanpa meninggalkan nilai kemanusiaan."
-    },
-    {
-        question: "Industri hijau bertujuan untuk...",
-        options: ["Produksi massal tanpa batas", "Mendorong produksi ramah lingkungan", "Meningkatkan harga jual desain", "Memakai tinta mahal"],
-        correct: 1,
-        explanation: "Industri hijau berfokus pada proses produksi yang ramah lingkungan, hemat energi, dan minim limbah."
-    },
-    {
-        question: "Komposisi fotografi artinya...",
-        options: ["Editing warna foto", "Mengatur letak objek dalam frame", "Menambahkan teks", "Memilih ISO"],
-        correct: 1,
-        explanation: "Komposisi adalah cara menempatkan objek dan elemen foto dalam frame agar hasilnya seimbang dan menarik."
-    },
-    {
-        question: "Jenis kamera DSLR adalah...",
-        options: ["Analog", "Digital Single Lens Reflex", "Kamera HP", "Komputer"],
-        correct: 1,
-        explanation: "DSLR merupakan kamera digital dengan sistem cermin dan lensa yang bisa diganti-ganti."
-    },
-    {
-        question: "Aperture berfungsi untuk...",
-        options: ["Mengatur ukuran file", "Mengatur bukaan lensa", "Memilih mode kamera", "Menambahkan filter"],
-        correct: 1,
-        explanation: "Aperture mengatur seberapa besar bukaan lensa saat memotret yang mempengaruhi cahaya dan depth of field."
-    },
-    {
-        question: "ISO di kamera berfungsi untuk...",
-        options: ["Mengatur warna foto", "Sensitivitas sensor terhadap cahaya", "Memilih jenis lensa", "Membuat desain poster"],
-        correct: 1,
-        explanation: "ISO mengatur seberapa sensitif sensor kamera terhadap cahaya, semakin tinggi ISO, semakin terang hasil gambar."
-    },
-    {
-        question: "Shutter speed cepat cocok untuk...",
-        options: ["Foto malam", "Memotret objek bergerak cepat", "Memotret pemandangan", "Foto siluet"],
-        correct: 1,
-        explanation: "Shutter speed cepat berguna untuk membekukan gerakan objek agar tidak blur."
-    },
-    {
-        question: "Editing foto biasanya dilakukan untuk...",
-        options: ["Mengatur exposure dan warna", "Mengganti kamera", "Mengatur komposisi cetak", "Memilih mode Manual"],
-        correct: 0,
-        explanation: "Editing bertujuan memperbaiki hasil foto dari segi cahaya, warna, hingga komposisi agar lebih optimal."
-    },
-    {
-        question: "Aplikasi editing foto berbasis mobile contohnya...",
-        options: ["CorelDRAW", "Lightroom Mobile", "Notepad", "Kalkulator"],
-        correct: 1,
-        explanation: "Lightroom Mobile adalah aplikasi editing foto profesional berbasis mobile yang banyak dipakai fotografer."
-    },
-    {
-        question: "Mode Manual di kamera memungkinkan...",
-        options: ["Semua pengaturan diatur manual", "ISO saja otomatis", "Aperture terkunci", "Flash selalu aktif"],
-        correct: 0,
-        explanation: "Mode Manual memberi kontrol penuh atas ISO, shutter speed, aperture, dan white balance."
-    },
-    {
-        question: "Jenis software berbasis vector contohnya...",
-        options: ["Photoshop", "Adobe Illustrator", "Lightroom", "Camera360"],
-        correct: 1,
-        explanation: "Adobe Illustrator adalah software desain berbasis vector yang ideal untuk logo, ikon, dan ilustrasi."
-    },
+    // {
+    //     question: "Apa itu technopreneur di bidang desain komunikasi visual?",
+    //     options: ["Pekerja kantoran", "Wirausaha berbasis teknologi", "Fotografer freelance", "Desainer grafis junior"],
+    //     correct: 1,
+    //     explanation: "Technopreneur adalah wirausaha yang mengembangkan bisnis dengan memanfaatkan teknologi digital, seperti desain grafis, media sosial, dan fotografi."
+    // },
+    // {
+    //     question: "Apa yang dimaksud K3LH?",
+    //     options: ["Kamera, Komputer, Lighting, Harddisk", "Keselamatan dan Kesehatan Kerja serta Lingkungan Hidup", "Komunitas Kreatif Lokal Harapan", "Kode Etik 3D"],
+    //     correct: 1,
+    //     explanation: "K3LH merupakan aturan dan prosedur keselamatan kerja dan perlindungan lingkungan di tempat kerja, termasuk di industri desain dan fotografi."
+    // },
+    // {
+    //     question: "Proses berpikir kreatif biasanya dimulai dengan...",
+    //     options: ["Meniru karya orang lain", "Membaca buku pelajaran", "Mencari ide dan inspirasi", "Memotret langsung"],
+    //     correct: 2,
+    //     explanation: "Berpikir kreatif dimulai dengan pencarian ide atau inspirasi agar menghasilkan konsep desain atau karya yang baru dan unik."
+    // },
+    // {
+    //     question: "Sketsa adalah...",
+    //     options: ["Foto model", "Gambar rancangan awal", "Desain digital", "Filter foto"],
+    //     correct: 1,
+    //     explanation: "Sketsa adalah gambar rancangan awal yang menjadi acuan sebelum karya desain atau ilustrasi dibuat secara utuh."
+    // },
+    // {
+    //     question: "Fungsi tipografi dalam desain adalah...",
+    //     options: ["Menyusun teks agar komunikatif", "Mengatur warna foto", "Memilih kamera", "Menentukan ISO"],
+    //     correct: 0,
+    //     explanation: "Tipografi berfungsi mengatur bentuk dan tata letak huruf agar pesan desain lebih mudah terbaca dan menarik."
+    // },
+    // {
+    //     question: "Bitmap adalah...",
+    //     options: ["Gambar berbasis pixel", "Gambar berbasis vector", "Format animasi", "Kamera digital"],
+    //     correct: 0,
+    //     explanation: "Bitmap merupakan gambar yang terdiri dari pixel-pixel kecil. Saat diperbesar, gambar bisa pecah."
+    // },
+    // {
+    //     question: "Vector adalah...",
+    //     options: ["Gambar yang pecah saat diperbesar", "Gambar berbasis garis dan bidang", "File foto hitam putih", "Filter kamera"],
+    //     correct: 1,
+    //     explanation: "Vector adalah gambar yang dibentuk dari garis, bidang, dan kurva, sehingga tetap tajam saat diperbesar."
+    // },
+    // {
+    //     question: "Industri 4.0 identik dengan...",
+    //     options: ["Desain manual", "Teknologi digital dan otomatisasi", "Poster tradisional", "Lensa fix"],
+    //     correct: 1,
+    //     explanation: "Industri 4.0 adalah era otomatisasi industri berbasis teknologi digital, termasuk di bidang desain dan fotografi."
+    // },
+    // {
+    //     question: "Society 5.0 adalah konsep tentang...",
+    //     options: ["Masyarakat digital seimbang dengan kemanusiaan", "Dunia fotografi outdoor", "Komunitas pegiat desain", "Kamera film lawas"],
+    //     correct: 0,
+    //     explanation: "Society 5.0 merupakan konsep masyarakat yang memanfaatkan teknologi digital tanpa meninggalkan nilai kemanusiaan."
+    // },
+    // {
+    //     question: "Industri hijau bertujuan untuk...",
+    //     options: ["Produksi massal tanpa batas", "Mendorong produksi ramah lingkungan", "Meningkatkan harga jual desain", "Memakai tinta mahal"],
+    //     correct: 1,
+    //     explanation: "Industri hijau berfokus pada proses produksi yang ramah lingkungan, hemat energi, dan minim limbah."
+    // },
+    // {
+    //     question: "Komposisi fotografi artinya...",
+    //     options: ["Editing warna foto", "Mengatur letak objek dalam frame", "Menambahkan teks", "Memilih ISO"],
+    //     correct: 1,
+    //     explanation: "Komposisi adalah cara menempatkan objek dan elemen foto dalam frame agar hasilnya seimbang dan menarik."
+    // },
+    // {
+    //     question: "Jenis kamera DSLR adalah...",
+    //     options: ["Analog", "Digital Single Lens Reflex", "Kamera HP", "Komputer"],
+    //     correct: 1,
+    //     explanation: "DSLR merupakan kamera digital dengan sistem cermin dan lensa yang bisa diganti-ganti."
+    // },
+    // {
+    //     question: "Aperture berfungsi untuk...",
+    //     options: ["Mengatur ukuran file", "Mengatur bukaan lensa", "Memilih mode kamera", "Menambahkan filter"],
+    //     correct: 1,
+    //     explanation: "Aperture mengatur seberapa besar bukaan lensa saat memotret yang mempengaruhi cahaya dan depth of field."
+    // },
+    // {
+    //     question: "ISO di kamera berfungsi untuk...",
+    //     options: ["Mengatur warna foto", "Sensitivitas sensor terhadap cahaya", "Memilih jenis lensa", "Membuat desain poster"],
+    //     correct: 1,
+    //     explanation: "ISO mengatur seberapa sensitif sensor kamera terhadap cahaya, semakin tinggi ISO, semakin terang hasil gambar."
+    // },
+    // {
+    //     question: "Shutter speed cepat cocok untuk...",
+    //     options: ["Foto malam", "Memotret objek bergerak cepat", "Memotret pemandangan", "Foto siluet"],
+    //     correct: 1,
+    //     explanation: "Shutter speed cepat berguna untuk membekukan gerakan objek agar tidak blur."
+    // },
+    // {
+    //     question: "Editing foto biasanya dilakukan untuk...",
+    //     options: ["Mengatur exposure dan warna", "Mengganti kamera", "Mengatur komposisi cetak", "Memilih mode Manual"],
+    //     correct: 0,
+    //     explanation: "Editing bertujuan memperbaiki hasil foto dari segi cahaya, warna, hingga komposisi agar lebih optimal."
+    // },
+    // {
+    //     question: "Aplikasi editing foto berbasis mobile contohnya...",
+    //     options: ["CorelDRAW", "Lightroom Mobile", "Notepad", "Kalkulator"],
+    //     correct: 1,
+    //     explanation: "Lightroom Mobile adalah aplikasi editing foto profesional berbasis mobile yang banyak dipakai fotografer."
+    // },
+    // {
+    //     question: "Mode Manual di kamera memungkinkan...",
+    //     options: ["Semua pengaturan diatur manual", "ISO saja otomatis", "Aperture terkunci", "Flash selalu aktif"],
+    //     correct: 0,
+    //     explanation: "Mode Manual memberi kontrol penuh atas ISO, shutter speed, aperture, dan white balance."
+    // },
+    // {
+    //     question: "Jenis software berbasis vector contohnya...",
+    //     options: ["Photoshop", "Adobe Illustrator", "Lightroom", "Camera360"],
+    //     correct: 1,
+    //     explanation: "Adobe Illustrator adalah software desain berbasis vector yang ideal untuk logo, ikon, dan ilustrasi."
+    // },
     {
         question: "Histogram di kamera berfungsi untuk...",
         options: ["Melihat distribusi cahaya", "Memilih mode fokus", "Mengatur shutter speed", "Memilih lensa"],
@@ -432,7 +432,7 @@ function showResults() {
     resultDetail.innerHTML = currentLevel === 1 ? (score >= 15 ? `Kamu bisa lanjut ke <strong>Level 2</strong>! Ayo pilih untuk melanjutkan.` : `Skor kamu belum cukup untuk lanjut ke Level 2. Yuk coba lagi!`) : `Kamu sudah menyelesaikan Level 2!`;
     retryBtn.style.display = score >= 15 ? 'none' : 'block';
     nextLevelBtn.style.display = score >= 15 && currentLevel === 1 ? 'block' : 'none';
-    shareBtn.style.display = score >= 15 ? 'block' : 'none';
+    // shareBtn.style.display = score >= 15 ? 'block' : 'none';
 
     // Unlock Level 2 if score >= 4 on Level 1
     if (currentLevel === 1 && score >= 4) {
@@ -464,39 +464,31 @@ function showResults() {
 }
 
 function shareScore() {
-    // Update skor di dalam card
-    document.getElementById('result-score').textContent = `${score} dari ${quizData.length}`;
+    const shareCard = document.getElementById('result-container');
+    document.getElementById('exit-btn').style.display = 'none';
+    const message = `🔥 Aku baru aja dapet skor ${score} di KUIS KEREN INI! 🚀\nCoba juga yuk!\n\nAyo, buktikan kamu lebih baik dari aku!`;
 
-    const shareCard = document.getElementById('share-card');
-
-    // Scroll ke atas supaya elemen terlihat (optional, tergantung posisi di halaman)
-    window.scrollTo(0, 0);
-
-    // Konversi HTML ke canvas
     html2canvas(shareCard).then(canvas => {
-        // Ubah canvas ke data URL (image)
+        // Convert canvas to base64 image data
         const imgData = canvas.toDataURL('image/png');
 
-        // Buat link untuk download
+        // Create a temporary download link for the image
         const link = document.createElement('a');
         link.href = imgData;
         link.download = 'skor-kuis.png';
-        link.click();
 
-        // (Opsional) Untuk Web Share API yang dukung file:
-        if (navigator.canShare && navigator.canShare({files: []})) {
-            canvas.toBlob(blob => {
-                const file = new File([blob], "skor-kuis.png", {type: "image/png"});
-                navigator.share({
-                    title: 'Skor Kuis Saya!',
-                    text: 'Yuk coba kuis ini juga!',
-                    files: [file]
-                }).catch(err => console.log("Gagal share dengan file:", err));
-            });
-        } else {
-            console.log("Web Share API dengan file tidak tersedia. Gambar sudah diunduh.");
-        }
+        // Create WhatsApp message
+        const whatsappMessage = `${message}\n\nGambar: ${link.href}`;
+
+        // Open WhatsApp link with message
+        // Redirect user to WhatsApp
+        // Open the link in a new tab
+        window.open(`https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+
+        // Optionally, you can automatically trigger the download of the image:
+        // link.click();
     });
+    document.getElementById('exit-btn').style.display = 'block';
 }
 
 function goToLevelSelection() {

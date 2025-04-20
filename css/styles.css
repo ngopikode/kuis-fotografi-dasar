@@ -26,9 +26,6 @@ body {
 }
 
 .btn:hover {
-    background-color: #0d6efd;
-    color: white;
-    transform: scale(1.1) rotate(5deg); /* Memperbesar dan memutar tombol */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
     transition: all 0.3s ease;
 }
@@ -37,7 +34,6 @@ body {
 .btn:active {
     transform: scale(0.95); /* Mengurangi ukuran tombol saat ditekan */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Mengurangi bayangan untuk efek 'tertekan' */
-    background-color: #0b5ed7; /* Warna sedikit lebih gelap saat diklik */
 }
 
 .particle {
