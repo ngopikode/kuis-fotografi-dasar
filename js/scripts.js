@@ -374,7 +374,7 @@ function selectOption(selectedButton, optionIndex) {
         });
         Swal.fire({
             title: 'Benar!',
-            html: `<p class="mb-2">+3 Detik Bonus!</p><p><strong>Penjelasan:</strong> ${question.explanation}</p>`,
+            html: `<p class="mb-2">+3 Detik Bonus!</p><strong>Penjelasan:</strong><p class="text-dark">${question.explanation}</p>`,
             icon: 'success',
             confirmButtonText: 'Oke, lanjut!'
         });
@@ -382,7 +382,7 @@ function selectOption(selectedButton, optionIndex) {
         if (soundEnabled) ahhSound.play();
         Swal.fire({
             title: 'Salah!',
-            html: `<p class="mb-2">Yuk coba baca dulu.</p><p><strong>Penjelasan:</strong> ${question.explanation}</p>`,
+            html: `<p class="mb-2">Yuk coba baca dulu.</p><strong>Penjelasan:</strong><p class="text-dark">${question.explanation}</p>`,
             icon: 'error',
             confirmButtonText: 'Oke deh'
         });
@@ -426,13 +426,13 @@ function showResults() {
     document.getElementById('main-container').style.display = 'none';
 
     resultContainer.style.display = 'block';
-    resultIcon.className = `fas ${score > quizData.length / 2 ? 'fa-trophy text-success' : 'fa-times-circle text-danger'} fa-3x`;
+    resultIcon.className = `fas ${score >= 15 ? 'fa-trophy text-success' : 'fa-times-circle text-danger'} fa-3x`;
     resultScore.textContent = `Skor kamu: ${score} / ${quizData.length}`;
-    resultMessage.textContent = score > quizData.length / 2 ? 'Mantap! Kamu berhasil!' : 'Belum cukup, ayo coba lagi!';
-    resultDetail.innerHTML = currentLevel === 1 ? (score >= 4 ? `Kamu bisa lanjut ke <strong>Level 2</strong>! Ayo pilih untuk melanjutkan.` : `Skor kamu belum cukup untuk lanjut ke Level 2. Yuk coba lagi!`) : `Kamu sudah menyelesaikan Level 2!`;
-    retryBtn.style.display = score > quizData.length / 2 ? 'none' : 'block';
-    nextLevelBtn.style.display = score > quizData.length / 2 && currentLevel === 1 ? 'block' : 'none';
-    shareBtn.style.display = score > quizData.length / 2 ? 'block' : 'none';
+    resultMessage.textContent = score >= 15 ? 'Mantap! Kamu berhasil!' : 'Belum cukup, ayo coba lagi!';
+    resultDetail.innerHTML = currentLevel === 1 ? (score >= 15 ? `Kamu bisa lanjut ke <strong>Level 2</strong>! Ayo pilih untuk melanjutkan.` : `Skor kamu belum cukup untuk lanjut ke Level 2. Yuk coba lagi!`) : `Kamu sudah menyelesaikan Level 2!`;
+    retryBtn.style.display = score >= 15 ? 'none' : 'block';
+    nextLevelBtn.style.display = score >= 15 && currentLevel === 1 ? 'block' : 'none';
+    shareBtn.style.display = score >= 15 ? 'block' : 'none';
 
     // Unlock Level 2 if score >= 4 on Level 1
     if (currentLevel === 1 && score >= 4) {
