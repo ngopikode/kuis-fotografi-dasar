@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "obfuscate-js": "npx javascript-obfuscator js/scripts.js --output docs/js/scripts.js",
-    "minify-css": "npx cleancss -o docs/css/styles.min.css css/styles.css",
+    "minify-css": "npx cleancss -o docs/css/styles.css css/styles.css",
     "copy-assets": "npx ncp ./assets docs\\assets && npx ncp ./index.html docs\\index.html",
     "build": "npm run obfuscate-js && npm run minify-css && npm run copy-assets"
   },
