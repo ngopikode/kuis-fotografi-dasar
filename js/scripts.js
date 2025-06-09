@@ -161,13 +161,15 @@ const level2Questions = [
         question: "Apa itu komposisi Rule of Thirds?",
         options: ["Aturan ISO", "Pembagian frame jadi tiga bagian", "Tipe lensa", "Teknik pencahayaan"],
         correct: 1,
-        explanation: "Rule of Thirds adalah teknik komposisi dengan membagi frame jadi 9 kotak untuk meletakkan objek utama di titik pertemuan garis."
+        explanation: "Rule of Thirds adalah teknik komposisi dengan membagi frame jadi 9 kotak untuk meletakkan objek utama di titik pertemuan garis.",
+        image: "https://main.mobile.doss.co.id/storage/uploads/2023/06/ruleofthirds-example-0007-scaled.webp"
     },
     {
         question: "Lensa fix dikenal karena...",
         options: ["Bisa zoom", "Tidak bisa zoom", "Auto fokus tinggi", "Berat dan mahal"],
         correct: 1,
-        explanation: "Lensa fix memiliki focal length tetap, kualitas optiknya lebih baik, dan biasanya aperture-nya lebih besar."
+        explanation: "Lensa fix memiliki focal length tetap, kualitas optiknya lebih baik, dan biasanya aperture-nya lebih besar.",
+        image: "https://id.canon/media/migration/shared/live/products/ID/EF50mm%20f1.8%20STM-big.png"
     },
     {
         question: "Efek dari aperture besar (f/1.8) adalah...",
@@ -426,7 +428,7 @@ function showResults() {
     document.getElementById('main-container').style.display = 'none';
 
     resultContainer.style.display = 'block';
-    resultIcon.className = `fas ${score >= 15 ? 'fa-trophy text-success' : 'fa-times-circle text-danger'} fa-3x`;
+    resultIcon.className = `fas ${score >= 15 || (currentLevel === 2 && score >= 8) ? 'fa-trophy text-success' : 'fa-times-circle text-danger'} fa-3x`;
     resultScore.textContent = `Skor kamu: ${score} / ${quizData.length}`;
     resultMessage.textContent = score >= 15 ? 'Mantap! Kamu berhasil!' : 'Belum cukup, ayo coba lagi!';
     resultDetail.innerHTML = currentLevel === 1 ? (score >= 15 ? `Kamu bisa lanjut ke <strong>Level 2</strong>! Ayo pilih untuk melanjutkan.` : `Skor kamu belum cukup untuk lanjut ke Level 2. Yuk coba lagi!`) : `Kamu sudah menyelesaikan Level 2!`;
