@@ -365,30 +365,7 @@ function selectOption(selectedButton, optionIndex) {
     clearInterval(timer);
     nextBtn.style.display = 'block';
 
-    if (isCorrect) {
-        score++;
-        bonusTime += 4;
-        if (soundEnabled) hornSound.play();
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: {y: 0.6}
-        });
-        Swal.fire({
-            title: 'Benar!',
-            html: `<p class="mb-2">+3 Detik Bonus!</p><strong>Penjelasan:</strong><p class="text-dark">${question.explanation}</p>`,
-            icon: 'success',
-            confirmButtonText: 'Oke, lanjut!'
-        });
-    } else {
-        if (soundEnabled) ahhSound.play();
-        Swal.fire({
-            title: 'Salah!',
-            html: `<p class="mb-2">Yuk coba baca dulu.</p><strong>Penjelasan:</strong><p class="text-dark">${question.explanation}</p>`,
-            icon: 'error',
-            confirmButtonText: 'Oke deh'
-        });
-    }
+    alertAnswer({isCorrect: isCorrect});
 }
 
 function checkAnswer() {
@@ -414,8 +391,37 @@ function startTimer() {
         if (timeLeft <= 0) {
             clearInterval(timer);
             checkAnswer();
+            alertAnswer({isTimeout: true});
         }
     }, 1000);
+}
+
+function alertAnswer({isCorrect = false, isTimeout = false}) {
+    const question = quizData[currentQuestion];
+    if (isCorrect && !isTimeout) {
+        score++;
+        bonusTime += 4;
+        if (soundEnabled) hornSound.play();
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: {y: 0.6}
+        });
+        Swal.fire({
+            title: 'Benar!',
+            html: `<p class="mb-2">+3 Detik Bonus!</p><strong>Penjelasan:</strong><p class="text-dark">${question.explanation}</p>`,
+            icon: 'success',
+            confirmButtonText: 'Oke, lanjut!'
+        });
+    } else {
+        if (soundEnabled) ahhSound.play();
+        Swal.fire({
+            title: isTimeout ? 'Oops, waktu habis!' : 'Salah!',
+            html: `<p class="mb-2">Yuk coba baca dulu.</p><strong>Penjelasan:</strong><p class="text-dark">${question.explanation}</p>`,
+            icon: isTimeout ? 'info' : 'error',
+            confirmButtonText: 'Oke deh'
+        });
+    }
 }
 
 function updateProgress() {
