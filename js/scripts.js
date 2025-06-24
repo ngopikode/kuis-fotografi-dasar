@@ -241,7 +241,7 @@ async function fetchQuestionsFromApi(level) {
         return null; // Mengembalikan null jika API Key tidak ada
     }
 
-    const apiUrl = `http://dashboard-kuis.ngopikode.my.id/api/quiz?key=${API_KEY}&level=${level}`;
+    const apiUrl = `https://dashboard-kuis.ngopikode.my.id/api/quiz?key=${API_KEY}&level=${level}`;
 
     try {
         const response = await fetch(apiUrl);
