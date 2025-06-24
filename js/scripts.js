@@ -1,39 +1,5 @@
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('loader').style.display = 'none';
-        document.getElementById('level-selection').style.display = 'block';
-    }, 1200);
-});
-
-document.addEventListener("pointerdown", function (e) {
-    const numParticles = 17;
-
-    for (let i = 0; i < numParticles; i++) {
-        const particle = document.createElement("div");
-        particle.className = "particle";
-
-        const x = e.clientX;
-        const y = e.clientY;
-        particle.style.left = `${x}px`;
-        particle.style.top = `${y}px`;
-
-        const angle = Math.random() * 2 * Math.PI;
-        const distance = 40 + Math.random() * 30;
-        const dx = Math.cos(angle) * distance;
-        const dy = Math.sin(angle) * distance;
-
-        particle.style.setProperty("--dx", `${dx}px`);
-        particle.style.setProperty("--dy", `${dy}px`);
-
-        document.body.appendChild(particle);
-
-        particle.addEventListener("animationend", () => {
-            particle.remove();
-        });
-    }
-});
-
-const level1Questions = [
+// Menggunakan data konstanta ini sebagai fallback jika API gagal
+const localLevel1Questions = [
     {
         question: "Apa itu technopreneur di bidang desain komunikasi visual?",
         options: ["Pekerja kantoran", "Wirausaha berbasis teknologi", "Fotografer freelance", "Desainer grafis junior"],
@@ -156,7 +122,7 @@ const level1Questions = [
     }
 ];
 
-const level2Questions = [
+const localLevel2Questions = [
     {
         question: "Apa itu komposisi Rule of Thirds?",
         options: ["Aturan ISO", "Pembagian frame jadi tiga bagian", "Tipe lensa", "Teknik pencahayaan"],
@@ -229,17 +195,7 @@ function shuffle(array) {
     return array;
 }
 
-let quizData = shuffle(level1Questions.map(q => {
-    const shuffledOptions = shuffle([...q.options]);
-    return {
-        question: q.question,
-        options: shuffledOptions,
-        correct: shuffledOptions.indexOf(q.options[q.correct]),
-        image: q.image || null,
-        explanation: q.explanation
-    };
-}));
-
+let quizData = []; // Akan diisi dari API atau data lokal
 let currentQuestion = 0;
 let score = 0;
 let timer;
@@ -248,6 +204,7 @@ let bonusTime = 0;
 let soundEnabled = true;
 let currentLevel = 1;
 
+// Elemen HTML sudah benar, tidak perlu diubah lagi
 const questionEl = document.getElementById('question');
 const optionsEl = document.getElementById('options');
 const nextBtn = document.getElementById('next-btn');
@@ -273,26 +230,116 @@ soundToggleBtn.addEventListener('click', () => {
     soundIcon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
 });
 
-function startLevel(level) {
+// --- Fungsi Baru: Ambil Soal dari API ---
+async function fetchQuestionsFromApi(level) {
+    // Ambil API Key dari parameter URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const API_KEY = urlParams.get('key'); // Mengambil nilai dari ?key=xxx
+
+    if (!API_KEY) {
+        console.warn('Parameter "key" tidak ditemukan di URL. Menggunakan data lokal.');
+        return null; // Mengembalikan null jika API Key tidak ada
+    }
+
+    const apiUrl = `http://dashboard-kuis.ngopikode.my.id/api/quiz?key=${API_KEY}&level=${level}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            console.error(`HTTP error! status: ${response.status}`);
+            const errorData = await response.json();
+            console.error('API Error:', errorData.message);
+            return null; // Mengembalikan null jika ada kesalahan HTTP
+        }
+        const data = await response.json();
+        console.log('Soal berhasil diambil dari API:', data);
+        return data;
+    } catch (error) {
+        console.error('Gagal mengambil soal dari API:', error);
+        return null;
+    }
+}
+
+// --- Modifikasi Fungsi startLevel ---
+async function startLevel(level) {
     currentLevel = level;
     score = 0;
     currentQuestion = 0;
 
-    const questions = level === 1 ? level1Questions : level2Questions;
-    quizData = shuffle(questions.map(q => {
+    // Tampilkan loader saat data dimuat
+    document.getElementById('loader').style.display = 'flex';
+    document.getElementById('level-selection').style.display = 'none';
+    document.getElementById('main-container').style.display = 'none'; // Sembunyikan main container dulu
+
+    let questionsToLoad = null;
+
+    try {
+        // Coba ambil dari API
+        questionsToLoad = await fetchQuestionsFromApi(level);
+    } catch (error) {
+        console.error("Kesalahan saat mengambil data dari API, menggunakan data lokal:", error);
+    }
+
+    if (!questionsToLoad || questionsToLoad.length === 0) {
+        // Jika API gagal atau mengembalikan data kosong, gunakan data lokal
+        console.warn('Menggunakan data lokal karena API gagal atau kosong.');
+        questionsToLoad = level === 1 ? localLevel1Questions : localLevel2Questions;
+    }
+
+    // Pastikan data yang diambil (baik dari API atau lokal) di-shuffle dan diformat ulang
+    // agar `correct` mengacu pada indeks pilihan setelah di-shuffle
+    quizData = shuffle(questionsToLoad.map(q => {
         const shuffledOptions = shuffle([...q.options]);
         return {
             question: q.question,
             options: shuffledOptions,
-            correct: shuffledOptions.indexOf(q.options[q.correct]),
+            correct: shuffledOptions.indexOf(q.options[q.correct]), // Sesuaikan indeks jawaban benar
             image: q.image || null,
             explanation: q.explanation
         };
     }));
-    document.getElementById('level-selection').style.display = 'none';
+
+    // Sembunyikan loader dan tampilkan main container setelah data siap
+    document.getElementById('loader').style.display = 'none';
     document.getElementById('main-container').style.display = 'block';
     loadQuestion();
 }
+
+window.addEventListener('load', () => {
+    // Sembunyikan loader setelah 1.2 detik dan tampilkan pemilihan level
+    setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('level-selection').style.display = 'block';
+    }, 1200);
+});
+
+document.addEventListener("pointerdown", function (e) {
+    const numParticles = 17;
+
+    for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+
+        const x = e.clientX;
+        const y = e.clientY;
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 40 + Math.random() * 30;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        particle.style.setProperty("--dx", `${dx}px`);
+        particle.style.setProperty("--dy", `${dy}px`);
+
+        document.body.appendChild(particle);
+
+        particle.addEventListener("animationend", () => {
+            particle.remove();
+        });
+    }
+});
 
 
 function loadQuestion() {
