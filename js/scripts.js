@@ -219,7 +219,6 @@ const resultScore = document.getElementById('result-score');
 const resultMessage = document.getElementById('result-message');
 const resultDetail = document.getElementById('result-detail');
 const retryBtn = document.getElementById('retry-btn');
-const shareBtn = document.getElementById('share-btn');
 const nextLevelBtn = document.getElementById('next-level-btn');
 
 const soundToggleBtn = document.getElementById('soundToggleBtn');
@@ -252,7 +251,7 @@ async function fetchQuestionsFromApi(level) {
             return null; // Mengembalikan null jika ada kesalahan HTTP
         }
         const data = await response.json();
-        console.log('Soal berhasil diambil dari API:', data);
+        console.log('Soal berhasil diambil dari API:');
         return data;
     } catch (error) {
         console.error('Gagal mengambil soal dari API:', error);
@@ -479,33 +478,46 @@ function updateProgress() {
 
 function showResults() {
     document.getElementById('main-container').style.display = 'none';
-
     resultContainer.style.display = 'block';
-    resultIcon.className = `fas ${score >= 15 || (currentLevel === 2 && score >= 8) ? 'fa-trophy text-success' : 'fa-times-circle text-danger'} fa-3x`;
-    resultScore.textContent = `Skor kamu: ${score} / ${quizData.length}`;
-    resultMessage.textContent = score >= 15 ? 'Mantap! Kamu berhasil!' : 'Belum cukup, ayo coba lagi!';
-    resultDetail.innerHTML = currentLevel === 1 ? (score >= 15 ? `Kamu bisa lanjut ke <strong>Level 2</strong>! Ayo pilih untuk melanjutkan.` : `Skor kamu belum cukup untuk lanjut ke Level 2. Yuk coba lagi!`) : `Kamu sudah menyelesaikan Level 2!`;
-    retryBtn.style.display = score >= 15 ? 'none' : 'block';
-    nextLevelBtn.style.display = score >= 15 && currentLevel === 1 ? 'block' : 'none';
-    // shareBtn.style.display = score >= 15 ? 'block' : 'none';
 
-    // Unlock Level 2 if score >= 4 on Level 1
-    if (currentLevel === 1 && score >= 15) {
+    // Menentukan skor kelulusan secara dinamis (75% dari total soal)
+    const passingScore = Math.floor(quizData.length * 0.75);
+    const hasPassed = score >= passingScore;
+
+    // Mengupdate elemen UI berdasarkan hasil kelulusan
+    resultIcon.className = `fas ${hasPassed ? 'fa-trophy text-success' : 'fa-times-circle text-danger'} fa-3x`;
+    resultScore.textContent = `Skor kamu: ${score} / ${quizData.length}`;
+    resultMessage.textContent = hasPassed ? 'Mantap! Kamu berhasil!' : 'Belum cukup, ayo coba lagi!';
+
+    // Pesan detail kelulusan
+    if (currentLevel === 1) {
+        resultDetail.innerHTML = hasPassed
+            ? `Kamu bisa lanjut ke <strong>Level 2</strong>! Ayo pilih untuk melanjutkan.`
+            : `Skor kamu belum cukup (minimal ${passingScore}) untuk lanjut ke Level 2. Yuk coba lagi!`;
+    } else {
+        resultDetail.textContent = `Kamu sudah menyelesaikan Level 2!`;
+    }
+
+    // Menampilkan tombol yang sesuai
+    retryBtn.style.display = hasPassed ? 'none' : 'block';
+    nextLevelBtn.style.display = hasPassed && currentLevel === 1 ? 'block' : 'none';
+
+    // Membuka Level 2 jika lulus Level 1
+    if (currentLevel === 1 && hasPassed) {
         document.getElementById('level2-btn').disabled = false;
-        // change btn color to primary
         document.getElementById('level2-btn').classList.remove('btn-secondary');
         document.getElementById('level2-btn').classList.add('btn-primary');
         Swal.fire({
             title: 'Level 2 Terbuka!',
-            text: 'Kamu bisa lanjut ke level selanjutnya.',
+            text: 'Kamu berhasil lolos dan bisa lanjut ke level selanjutnya.',
             icon: 'success',
             confirmButtonText: 'Lanjut!'
         });
     }
 
-    // Perfect score celebration
+    // Perayaan jika skor sempurna
     if (score === quizData.length) {
-        victorySound.play();
+        if (soundEnabled) victorySound.play();
         confetti({particleCount: 200, spread: 100, origin: {y: 0.6}});
         Swal.fire({
             title: 'Skor Sempurna!',
